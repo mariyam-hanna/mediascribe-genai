@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\DELL\\genai\\backend\\GenAiApp.api\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{73C747FE-F8E7-4840-8C0B-539D3B1524D1}|GenAiApp.api\\GenAiApp.api.csproj|c:\\users\\dell\\genai\\backend\\genaiapp.api\\genaiapp.api\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{73C747FE-F8E7-4840-8C0B-539D3B1524D1}|GenAiApp.api\\GenAiApp.api.csproj|solutionrelative:genaiapp.api\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\DELL\\genai\\backend\\GenAiApp.api\\GenAiApp.api\\.gitignore",
+              "RelativeDocumentMoniker": "GenAiApp.api\\.gitignore",
+              "ToolTip": "C:\\Users\\DELL\\genai\\backend\\GenAiApp.api\\GenAiApp.api\\.gitignore",
+              "RelativeToolTip": "GenAiApp.api\\.gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-17T18:08:13.335Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
