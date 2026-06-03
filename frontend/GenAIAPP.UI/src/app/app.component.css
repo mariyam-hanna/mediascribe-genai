@@ -1,0 +1,110 @@
+/* Page Background */
+body{
+  margin:0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(to bottom right, #f8fbff, #eef5ff);
+  min-height:100vh;
+}
+
+/* Header */
+header{
+  position: sticky;
+  top:0;
+  z-index:100;
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.8);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* Container */
+.container{
+  max-width:1200px;
+  margin:auto;
+}
+
+/* Logo Section */
+header a{
+  text-decoration:none;
+}
+
+/* Logo Text */
+header span{
+  color:#1e293b;
+  letter-spacing:0.5px;
+}
+
+/* SVG Icon */
+svg{
+  color:#3b82f6;
+  transition:0.3s;
+}
+
+svg:hover{
+  transform: rotate(-10deg) scale(1.1);
+}
+
+/* Navigation */
+nav ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:flex;
+  align-items:center;
+}
+
+/* Nav Links */
+nav a{
+  position:relative;
+  text-decoration:none;
+  font-weight:500;
+  transition:0.3s;
+  padding:8px 14px;
+  border-radius:10px;
+}
+
+/* Hover Effect */
+nav a:hover{
+  background:#eff6ff;
+  color:#2563eb;
+  transform: translateY(-2px);
+}
+
+/* Cute Underline Animation */
+nav a::after{
+  content:'';
+  position:absolute;
+  left:10px;
+  bottom:4px;
+  width:0%;
+  height:2px;
+  background:#3b82f6;
+  transition:0.3s;
+  border-radius:10px;
+}
+
+nav a:hover::after{
+  width:70%;
+}
+
+/* Main Content */
+main{
+  max-width:1200px;
+  margin:auto;
+  padding:40px 20px;
+}
+
+/* Responsive */
+@media(max-width:768px){
+
+  .container{
+    flex-direction:column;
+    gap:20px;
+  }
+
+  nav ul{
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+}
