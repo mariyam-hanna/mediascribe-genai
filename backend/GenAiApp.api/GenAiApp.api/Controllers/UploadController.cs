@@ -12,6 +12,12 @@ namespace GenAiApp.api.Controllers
         private readonly IOpenAiService _openAiService;
         private readonly IWhisperService _whisperService;
 
+        [HttpGet("test")]
+        public IActionResult Test()
+        {
+            return Ok(new { message = "Backend connected successfully" });
+        }
+
         public UploadController(IVideoService videoService, IOpenAiService openAiService, IWhisperService whisperService)
         {
             _videoService = videoService;
@@ -38,8 +44,12 @@ namespace GenAiApp.api.Controllers
                 ".mp4" or ".avi" => await _videoService.ExtractAudioAndTranscribeAsync(filePath),
                 _ => throw new NotSupportedException("Unsupported file type.")
             };
-            var content = await _openAiService.GenerateFormattedContentAsync(extractedText, outputType);
-            return Ok(new { content });
+            //var content = await _openAiService.GenerateFormattedContentAsync(extractedText, outputType);
+            //return Ok(new { content });
+            return Ok(new
+            {
+                content = extractedText
+            });
         }
     }
 }

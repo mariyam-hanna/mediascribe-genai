@@ -1,6 +1,13 @@
 
 <div class="container mx-auto px-4 py-12 ">
 <div class="text-center max-w 4xl mx-auto">
+  <div class="api-status">
+  {{ message }}
+</div>
+
+<button (click)="navigateToUpload()">
+  Upload File
+</button>
 <h1 class="text-5xl font-bold mb-4">
 Transform Unstructured Data with <span class="text-blue-500">AI</span>
 </h1>

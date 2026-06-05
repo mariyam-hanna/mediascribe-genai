@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
   imports: [CommonModule, FormsModule,ReactiveFormsModule,HttpClientModule],
   templateUrl: './upload.component.html',
   styleUrl: './upload.component.css',
-  providers: [HttpClient]
+  
 })
 
 export class UploadComponent {
@@ -46,37 +46,44 @@ if (event.dataTransfer?.files.length) {
     }
   }
 
-  onFileSelected(event: Event) {     
-     const fileInput = event.target as HTMLInputElement;
-    if (fileInput.files && fileInput.files.length > 0) {
-      this.form.patchValue({ file: fileInput.files[0] });
-    }
+  onFileSelected(event: Event) {
+  const fileInput = event.target as HTMLInputElement;
+
+  if (fileInput.files && fileInput.files.length > 0) {
+    this.selectedFile = fileInput.files[0];
+
+    this.form.patchValue({
+      file: this.selectedFile
+    });
   }
+}
 
    removeFile(): void {
     this.selectedFile = null;    
   }
 
-   generateContent() {     
-    if (!this.form || !this.form.value.file) return;
+   generateContent() {
 
-    const formData = new FormData();
-    formData.append('file', this.form.value.file);
-    formData.append('outputType', this.form.value.outputType);
+  console.log(this.form.value);
 
-    // this.loading = true;
-
-    this.http.post<{ content: string }>('https://localhost:7234/Upload', formData).subscribe({
-      next: (res) => {
-        this.generatedContent = res.content;
-        // this.loading = false;
-      },
-      error: () => {
-        alert('Error generating content');
-        // this.loading = false;
-      }
-    }); 
-    // Simulate loading
-    this.generatedContent = "Processing..." 
+  if (!this.form.value.file) {
+    alert('Please select a file');
+    return;
   }
+
+  const formData = new FormData();
+
+  formData.append('file', this.form.value.file);
+  formData.append('outputType', this.form.value.outputType);
+
+  this.http.post<{ content: string }>('http://localhost:5038/api/upload', formData).subscribe({
+  next: (res) => {
+    this.generatedContent = res.content;
+  },
+  error: (err) => {
+    console.error(err);
+    alert(JSON.stringify(err));
+  }
+});
+}
 }
