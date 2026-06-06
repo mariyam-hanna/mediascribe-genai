@@ -10,7 +10,10 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  testConnection() {
-    return this.http.get<any>(`${this.apiUrl}/test`);
+  uploadFile(formData: FormData) {
+    return this.http.post<{ content: string }>(
+      this.apiUrl,
+      formData
+    );
   }
 }

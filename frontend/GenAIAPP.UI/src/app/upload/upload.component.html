@@ -73,19 +73,18 @@
             ></textarea>
           </div>
 
-<button 
-           
-            class="w-full bg-gray-500 hover:bg-gray-600 text-white font-medium py-3 px-4 rounded-md transition-colors flex items-center justify-center gap-2"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-              <path d="M12 3a6 6 0 0 1-9 9 9 9 0 0 0 9-9Z"></path>
-            </svg>
-            Generate Content
-          </button>
+<button
+  [disabled]="loading"
+  class="w-full bg-gray-500 hover:bg-gray-600 text-white font-medium py-3 px-4 rounded-md"
+>
+  {{ loading ? 'Processing...' : 'Generate Content' }}
+</button>
 
 
             </div>
+            <div *ngIf="loading" class="text-center p-4">
+            Processing file...
+          </div>
 
               <!-- Output Section -->
         <div class="border rounded-lg p-6">
@@ -93,9 +92,14 @@
           <div *ngIf="!generatedContent" class="h-[400px] flex items-center justify-center text-gray-500 text-center p-4">
             <p>Upload a file and click "Generate Content" to see results here.</p>
           </div>
-          <div *ngIf="generatedContent" class="h-[400px] overflow-auto p-4 border rounded-md">
-            <pre>{{ generatedContent }}</pre>
-          </div>
+          <div
+            *ngIf="generatedContent"
+            class="h-[400px] overflow-auto p-4 border rounded-md bg-gray-50"
+          >
+            <pre class="whitespace-pre-wrap">
+          {{ generatedContent }}
+            </pre>
+</div>
         </div>
 
         </div>

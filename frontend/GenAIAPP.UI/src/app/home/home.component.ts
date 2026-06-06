@@ -9,27 +9,11 @@ import { ApiService } from '../services/api.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent  {
 
-  message = '';
+constructor(private router: Router) { }
 
-  constructor(
-    private router: Router,
-    private apiService: ApiService
-  ) { }
-
-  ngOnInit() {
-    this.apiService.testConnection().subscribe({
-      next: (response: any) => {
-        this.message = response.message;
-      },
-      error: (error:any) => {
-        console.error(error);
-        this.message = 'Connection failed';
-      }
-    });
-  }
-
+  
   navigateToUpload() {
     this.router.navigate(['/upload']);
   }

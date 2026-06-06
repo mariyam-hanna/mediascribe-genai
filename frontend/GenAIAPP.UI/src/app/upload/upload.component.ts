@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient ,HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-upload',
@@ -19,13 +20,47 @@ export class UploadComponent {
   outputType = "userStories"
   additionalInstructions = ""
   generatedContent = ""
+  loading = false;
+  allowedExtensions = [
+  '.txt'
+  // '.mp3',
+  // '.wav',
+  // '.mp4',
+  // '.avi'
+];
 
- constructor(private fb: FormBuilder, private http: HttpClient) {
-    this.form = this.fb.group({
+constructor(
+  private fb: FormBuilder,
+  private http: HttpClient,
+  private apiService: ApiService
+){
+  this.form = this.fb.group({
       file: [null],
-      outputType: ['test-case']
-    });
+      outputType: ['userStories']
+  });
+}
+
+//  constructor(private fb: FormBuilder, private http: HttpClient) {
+//     this.form = this.fb.group({
+//       file: [null],
+//       outputType: ['test-case']
+//     });
+//   }
+
+  validateFile(file: File): boolean {
+
+  const extension =
+    '.' + file.name.split('.').pop()?.toLowerCase();
+
+  if (!this.allowedExtensions.includes(extension)) {
+
+    alert('Unsupported file type');
+
+    return false;
   }
+
+  return true;
+}
 
   onDragOver(event: DragEvent) {
     event.preventDefault()
@@ -50,12 +85,18 @@ if (event.dataTransfer?.files.length) {
   const fileInput = event.target as HTMLInputElement;
 
   if (fileInput.files && fileInput.files.length > 0) {
-    this.selectedFile = fileInput.files[0];
 
-    this.form.patchValue({
-      file: this.selectedFile
-    });
-  }
+  const file = fileInput.files[0];
+
+  if (!this.validateFile(file))
+    return;
+
+  this.selectedFile = file;
+
+  this.form.patchValue({
+    file: file
+  });
+}
 }
 
    removeFile(): void {
@@ -63,6 +104,7 @@ if (event.dataTransfer?.files.length) {
   }
 
    generateContent() {
+    this.loading = true;
 
   console.log(this.form.value);
 
@@ -76,14 +118,18 @@ if (event.dataTransfer?.files.length) {
   formData.append('file', this.form.value.file);
   formData.append('outputType', this.form.value.outputType);
 
-  this.http.post<{ content: string }>('http://localhost:5038/api/upload', formData).subscribe({
-  next: (res) => {
-    this.generatedContent = res.content;
-  },
-  error: (err) => {
-    console.error(err);
-    alert(JSON.stringify(err));
-  }
+  this.apiService.uploadFile(formData).subscribe({
+    next: (res) => {
+      this.generatedContent = res.content;
+      this.loading = false;
+    },
+    error: (err) => {
+      console.error(err);
+      alert(JSON.stringify(err));
+      this.loading = false;
+    }
 });
+
 }
+
 }

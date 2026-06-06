@@ -40,10 +40,15 @@ namespace GenAiApp.api.Controllers
             string extractedText = extension switch
             {
                 ".txt" => await System.IO.File.ReadAllTextAsync(filePath),
-                ".mp3" or ".wav" => await _whisperService.TranscribeAudioAsync(filePath),
-                ".mp4" or ".avi" => await _videoService.ExtractAudioAndTranscribeAsync(filePath),
-                _ => throw new NotSupportedException("Unsupported file type.")
+                _ => throw new NotSupportedException("Only .txt files are currently supported.")
             };
+            //string extractedText = extension switch
+            //{
+            //    ".txt" => await System.IO.File.ReadAllTextAsync(filePath),
+            //    ".mp3" or ".wav" => await _whisperService.TranscribeAudioAsync(filePath),
+            //    ".mp4" or ".avi" => await _videoService.ExtractAudioAndTranscribeAsync(filePath),
+            //    _ => throw new NotSupportedException("Unsupported file type.")
+            //};
             //var content = await _openAiService.GenerateFormattedContentAsync(extractedText, outputType);
             //return Ok(new { content });
             return Ok(new
